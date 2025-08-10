@@ -1,4 +1,4 @@
-name: my_camera_plugin
+name: testing_camera_plugin
 description: "A flutter plugin for camera functionality, including image capture and processing into base64"
 version: 0.0.1
 homepage: https://github.com/RatanakvisalDuong/my_camera_flutter_plugin
