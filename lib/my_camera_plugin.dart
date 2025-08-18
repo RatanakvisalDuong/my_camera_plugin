@@ -1,56 +1,22 @@
-import 'package:flutter/foundation.dart';
-import 'package:flutter/services.dart';
+import 'package:testing_camera_plugin/my_camera_plugin_platform_interface.dart';
 
 class MyCameraPlugin {
-  static const MethodChannel channel = MethodChannel("my_camera_plugin");
+  static MyCameraPluginPlatform get _platform =>
+      MyCameraPluginPlatform.instance;
 
-  static Future<Map<dynamic, dynamic>?> startCamera() async {
-    try {
-      final result = await channel.invokeMethod<Map<dynamic, dynamic>>('startCamera');
-      return result;
-    } on PlatformException catch (e) {
-      if (kDebugMode) {
-        print('Camera error: ${e.code} - ${e.message}');
-      }
-      rethrow;
-    }
+  static Future<Map<dynamic, dynamic>?> startCamera() {
+    return _platform.startCamera();
   }
 
   static Future<int?> stopCamera() async {
-    try {
-      final result = await channel.invokeMethod<int>('stopCamera');
-      return result;
-    } on PlatformException catch (e) {
-      if (kDebugMode) {
-        print('Camera error: ${e.code} - ${e.message}');
-      }
-      rethrow;
-    }
+    return await _platform.stopCamera();
   }
 
   static Future<Map<dynamic, dynamic>?> switchCamera() async {
-    try {
-      final result = await channel.invokeMethod<Map<dynamic, dynamic>>(
-        'switchCamera',
-      );
-      return result;
-    } on PlatformException catch (e) {
-      if (kDebugMode) {
-        print('Switch camera error: ${e.code} - ${e.message}');
-      }
-      rethrow;
-    }
+    return await _platform.switchCamera();
   }
 
   static Future<String?> takePhoto() async {
-    try {
-      final result = await channel.invokeMethod<String>('takePhoto');
-      return result;
-    } on PlatformException catch (e) {
-      if (kDebugMode) {
-        print('Take photo error: ${e.code} - ${e.message}');
-      }
-      rethrow;
-    }
+    return await _platform.takePhoto();
   }
 }
